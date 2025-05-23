@@ -1,0 +1,177 @@
+[
+    {"model": "pescadores.municipio", "pk": 1, "fields": {"nome": "Ilhéus", "uf": "BA"}},
+    {"model": "pescadores.municipio", "pk": 2, "fields": {"nome": "Itacaré", "uf": "BA"}},
+    {"model": "pescadores.municipio", "pk": 3, "fields": {"nome": "Recife", "uf": "PE"}},
+    {"model": "pescadores.municipio", "pk": 4, "fields": {"nome": "Aracaju", "uf": "SE"}},
+    {"model": "pescadores.municipio", "pk": 5, "fields": {"nome": "Maceió", "uf": "AL"}},
+    {"model": "pescadores.comunidade", "pk": 1, "fields": {"nome": "Comunidade de Pescadores", "municipio": 1}},
+    {"model": "pescadores.colonia", "pk": 1, "fields": {"codigo": "Z 19 - Pontal", "comunidade": 1}},
+    {"model": "pescadores.colonia", "pk": 2, "fields": {"codigo": "Z 34 - Ilhéus", "comunidade": 1}},
+    {"model": "pescadores.colonia", "pk": 3, "fields": {"codigo": "Z 18 - Itacaré", "comunidade": 1}},
+    {"model": "pescadores.programasocial", "pk": 1, "fields": {"nome": "Bolsa Família"}},
+    {"model": "pescadores.programasocial", "pk": 2, "fields": {"nome": "Benefício Pescador"}},
+    {
+        "model": "pescadores.pescador",
+        "pk": 1,
+        "fields": {
+            "nome": "José",
+            "sexo": "m",
+            "apelido": "Zé",
+            "naturalidade": 1,
+            "data_nascimento": "1990-02-01",
+            "nome_pai": "Sicrano Silva",
+            "nome_mae": "Sicrana Silva",
+            "colonia": 1,
+            "matricula_colonia": "1234567",
+            "data_inscricao_colonia": "2023-03-20",
+            "rg": "13.716.727-1",
+            "cpf": "66582374095",
+            "proprietario_embarcacao": true,
+            "tipo_embarcacao": "barco",
+            "tamanho_embarcacao": "g",
+            "escolaridade": "medio_incompleto",
+            "renda_mensal_pesca": "1550.50",
+            "outra_renda": "Pensão",
+            "ativo": true,
+            "motivo_inatividade": null,
+            "falecido": false,
+            "data_cadastramento": "2024-05-05",
+            "programas_sociais": [1, 2]
+        }
+    },
+    {
+        "model": "pescadores.pescador",
+        "pk": 2,
+        "fields": {
+            "nome": "João de Tal",
+            "sexo": "m",
+            "apelido":  "Joãozinho",
+            "naturalidade": 3,
+            "data_nascimento": null,
+            "nome_pai": "Fulano de Tal",
+            "nome_mae": "Fulana de Tal",
+            "colonia": 2,
+            "matricula_colonia": "8901234",
+            "data_inscricao_colonia": "2021-04-20",
+            "rg": null,
+            "cpf": null,
+            "tipo_embarcacao": null,
+            "tamanho_embarcacao": null,
+            "proprietario_embarcacao": null,
+            "escolaridade": null,
+            "renda_mensal_pesca": null,
+            "outra_renda": null,
+            "ativo": true,
+            "motivo_inatividade": null,
+            "falecido": false,
+            "data_cadastramento": null
+        }
+    },
+    {
+        "model": "pescadores.pescador",
+        "pk": 3,
+        "fields": {
+            "nome": "Maria",
+            "sexo": "f",
+            "apelido": null,
+            "naturalidade": null,
+            "data_nascimento": null,
+            "nome_pai": null,
+            "nome_mae": null,
+            "colonia": null,
+            "matricula_colonia": null,
+            "data_inscricao_colonia": null,
+            "rg": null,
+            "cpf": null,
+            "tipo_embarcacao": null,
+            "tamanho_embarcacao": null,
+            "proprietario_embarcacao": null,
+            "escolaridade": null,
+            "renda_mensal_pesca": null,
+            "outra_renda": null,
+            "ativo": true,
+            "motivo_inatividade": null,
+            "falecido": false,
+            "data_cadastramento": null,
+            "programas_sociais": []
+        }
+    },
+    {
+        "model": "pescadores.telefone",
+        "pk": 1,
+        "fields": {
+            "numero": "1122223333",
+            "pescador": 1
+        }
+    },
+    {
+        "model": "pescadores.telefone",
+        "pk": 2,
+        "fields": {
+            "numero": "99022223333",
+            "pescador": 2
+        }
+    },
+    {
+        "model": "pescadores.telefone",
+        "pk": 3,
+        "fields": {
+            "numero": "80003000",
+            "pescador": 1
+        }
+    },
+    {
+        "model": "pescadores.dependente",
+        "pk": 1,
+        "fields": {
+            "relacao": "conjuge_companheira",
+            "quantidade": 1,
+            "pescador": 2
+        }
+    },
+    {
+        "model": "pescadores.dependente",
+        "pk": 2,
+        "fields": {
+            "relacao": "filhos_enteados",
+            "quantidade": 3,
+            "pescador": 2
+        }
+    },
+    {
+        "model": "pescadores.dependente",
+        "pk": 3,
+        "fields": {
+            "relacao": "conjuge_companheira",
+            "quantidade": 1,
+            "pescador": 1
+        }
+    },
+    {
+        "model": "pescadores.dependente",
+        "pk": 4,
+        "fields": {
+            "relacao": "sogro",
+            "quantidade": 1,
+            "pescador": 1
+        }
+    },
+    {
+        "model": "pescadores.dependente",
+        "pk": 5,
+        "fields": {
+            "relacao": "irmaos_netos_bisnetos",
+            "quantidade": 2,
+            "pescador": 1
+        }
+    },
+    {
+        "model": "pescadores.dependente",
+        "pk": 6,
+        "fields": {
+            "relacao": "irmaos_netos_bisnetos",
+            "quantidade": 5,
+            "pescador": 2
+        }
+    }
+]

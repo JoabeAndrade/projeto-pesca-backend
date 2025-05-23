@@ -31,8 +31,8 @@ UFS = [
 ]
 
 class Municipio(models.Model):
-    nome = models.CharField(max_length=100, null=True, blank=False)
-    uf = models.CharField(choices=UFS, max_length=2, null=True, blank=False)
+    nome = models.CharField(max_length=100)
+    uf = models.CharField(choices=UFS, max_length=2)
 
     def __repr__(self):
         return f'{self.nome} ({self.uf})'
