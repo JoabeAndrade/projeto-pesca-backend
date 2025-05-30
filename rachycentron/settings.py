@@ -40,11 +40,13 @@ INSTALLED_APPS = [
     'rest_framework',
     'pescadores',
     'debug_toolbar',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -127,4 +129,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 INTERNAL_IPS = [
     '127.0.0.1',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'localhost:3000',
 ]
