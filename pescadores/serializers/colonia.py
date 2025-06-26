@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from pescadores.models import Colonia, Comunidade
+from pescadores.models import Colonia, Comunidade, Endereco
 from .comunidade import ComunidadeSerializer
 from .endereco import EnderecoSerializer
 
@@ -10,7 +10,13 @@ class ColoniaSerializer(serializers.ModelSerializer):
         source='comunidade',
         write_only=True
     )
-    endereco_sede = EnderecoSerializer()
+    endereco_sede = EnderecoSerializer(read_only=True)
+    endereco_sede_id = serializers.PrimaryKeyRelatedField(
+        queryset=Endereco.objects.all(),
+        source='endereco_sede',
+        write_only=True,
+        required=False,
+    )
 
     class Meta:
         model = Colonia
@@ -20,4 +26,5 @@ class ColoniaSerializer(serializers.ModelSerializer):
             'comunidade',
             'comunidade_id',
             'endereco_sede',
+            'endereco_sede_id',
         ]

@@ -10,11 +10,11 @@ class TestesEnderecoSerializer(TestCase):
             'numero': '21',
             'bairro': 'Centro',
             'complemento': 'Apt. 101',
-            'municipio': mun.id,
+            'municipio_id': mun.id,
             'cep': '64000290',
         })
         self.assertTrue(s.is_valid())
-    
+
     def teste_logradouro_obrigatorio(self):
         mun = Municipio.objects.create(nome='Ilhéus', uf='BA')
         
@@ -22,7 +22,7 @@ class TestesEnderecoSerializer(TestCase):
             'numero': '21',
             'bairro': 'Centro',
             'complemento': 'Apt. 101',
-            'municipio': mun.id,
+            'municipio_id': mun.id,
             'cep': '64000290',
         })
         self.assertFalse(s.is_valid())
@@ -34,7 +34,7 @@ class TestesEnderecoSerializer(TestCase):
             'logradouro': 'Rua Arlindo Nogueira',
             'bairro': 'Centro',
             'complemento': 'Apt. 101',
-            'municipio': mun.id,
+            'municipio_id': mun.id,
             'cep': '64000290',
         })
         self.assertFalse(s.is_valid())
@@ -45,7 +45,7 @@ class TestesEnderecoSerializer(TestCase):
             'logradouro': 'Rua Arlindo Nogueira',
             'numero': '21',
             'complemento': 'Apt. 101',
-            'municipio': mun.id,
+            'municipio_id': mun.id,
             'cep': '64000290',
         })
         self.assertFalse(s.is_valid())
@@ -56,7 +56,7 @@ class TestesEnderecoSerializer(TestCase):
             'logradouro': 'Rua Arlindo Nogueira',
             'numero': '21',
             'bairro': 'Centro',
-            'municipio': mun.id,
+            'municipio_id': mun.id,
             'cep': '64000290',
         })
         self.assertTrue(s.is_valid())
@@ -70,7 +70,7 @@ class TestesEnderecoSerializer(TestCase):
             'cep': '64000290',
         })
         self.assertFalse(s.is_valid())
-        self.assertTrue('municipio' in s.errors.keys())
+        self.assertTrue('municipio_id' in s.errors.keys())
 
     def teste_cep_opcional(self):
         mun = Municipio.objects.create(nome='Ilhéus', uf='BA')
@@ -79,6 +79,6 @@ class TestesEnderecoSerializer(TestCase):
             'numero': '21',
             'bairro': 'Centro',
             'complemento': 'Apt. 101',
-            'municipio': mun.id,
+            'municipio_id': mun.id,
         })
         self.assertTrue(s.is_valid())
