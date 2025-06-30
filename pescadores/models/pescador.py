@@ -5,6 +5,8 @@ from pescadores.validators import only_numeric_chars
 from .municipio import Municipio
 from .endereco import Endereco
 from .colonia import Colonia
+from .comunidade import Comunidade
+from .associacao import Associacao
 from .programa_social import ProgramaSocial
 from .arte_pesca import ArtePesca
 from .area_pesca import AreaPesca
@@ -40,32 +42,40 @@ ESCOLARIDADE = [
 ]
 
 class Pescador(models.Model):
+    # Dados pessoais
     nome = models.CharField(max_length=100, validators=[MinLengthValidator(2)], blank=False, null=False)
     sexo = models.CharField(max_length=1, choices=SEXOS, blank=True, null=True)
     apelido = models.CharField(max_length=100, validators=[MinLengthValidator(2)], blank=True, null=True)
     data_nascimento = models.DateField(blank=True, null=True)
+    naturalidade = models.ForeignKey(Municipio, on_delete=models.PROTECT, blank=True, null=True)
     nome_pai = models.CharField(max_length=100, validators=[MinLengthValidator(2)], blank=True, null=True)
     nome_mae = models.CharField(max_length=100, validators=[MinLengthValidator(2)], blank=True, null=True)
-    rg = models.CharField(max_length=20, blank=True, null=True)
-    cpf = models.CharField(max_length=11, validators=[only_numeric_chars, MinLengthValidator(11)], blank=True, null=True)
+    endereco = models.ForeignKey(Endereco, on_delete=models.SET_NULL, blank=True, null=True)
+    # Organizações
+    colonia = models.ForeignKey(Colonia, on_delete=models.PROTECT, blank=True, null=True)
     matricula_colonia = models.CharField(max_length=20, validators=[only_numeric_chars], blank=True, null=True)
     data_inscricao_colonia = models.DateField(blank=True, null=True)
+    comunidade = models.ForeignKey(Comunidade, on_delete=models.PROTECT, blank=True, null=True)
+    associacoes = models.ManyToManyField(Associacao)
+    # Documentos
+    rg = models.CharField(max_length=20, blank=True, null=True)
+    cpf = models.CharField(max_length=11, validators=[only_numeric_chars, MinLengthValidator(11)], blank=True, null=True)
+    # Atuação
+    artes_pesca = models.ManyToManyField(ArtePesca)
     tipo_embarcacao = models.CharField(max_length=20, choices=TIPOS_EMBARCACAO, blank=True, null=True)
     tamanho_embarcacao = models.CharField(max_length=20, choices=TAMANHOS_EMBARCACAO, blank=True, null=True)
     proprietario_embarcacao = models.BooleanField(blank=True, null=True)
+    areas_pesca = models.ManyToManyField(AreaPesca)
+    # Dados sociais
     escolaridade = models.CharField(max_length=30, choices=ESCOLARIDADE, blank=True, null=True)
+    programas_sociais = models.ManyToManyField(ProgramaSocial)
     renda_mensal_pesca = models.DecimalField(max_digits=9, decimal_places=2, validators=[MinValueValidator(Decimal(0))], blank=True, null=True)
     outra_renda = models.CharField(max_length=50, blank=True, null=True)
+    # Outros
     ativo = models.BooleanField(default=True, null=True)
     motivo_inatividade = models.TextField(blank=True, null=True)
-    falecido = models.BooleanField(default=False, null=True)
     data_cadastramento = models.DateField(blank=True, null=True)
-    endereco = models.ForeignKey(Endereco, on_delete=models.SET_NULL, blank=True, null=True)
-    naturalidade = models.ForeignKey(Municipio, on_delete=models.PROTECT, blank=True, null=True)
-    colonia = models.ForeignKey(Colonia, on_delete=models.PROTECT, blank=True, null=True)
-    programas_sociais = models.ManyToManyField(ProgramaSocial)
-    areas_pesca = models.ManyToManyField(AreaPesca)
-    artes_pesca = models.ManyToManyField(ArtePesca)
+    falecido = models.BooleanField(default=False, null=True)
 
     def delete(self, *args, **kwargs):
         if self.endereco:
