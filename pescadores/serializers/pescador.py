@@ -6,6 +6,8 @@ from .comunidade import ComunidadeSerializer
 from .endereco import EnderecoSerializer
 from .dependente import DependenteSerializer
 from .telefone import TelefoneSerializer
+from .area_pesca import AreaPescaSerializer
+from .arte_pesca import ArtePescaSerializer
 
 class PescadorSerializer(serializers.ModelSerializer):
     naturalidade = MunicipioSerializer(read_only=True)
@@ -13,6 +15,7 @@ class PescadorSerializer(serializers.ModelSerializer):
         queryset=Municipio.objects.all(),
         source='naturalidade',
         write_only=True,
+        allow_null=True,
         required=False,
     )
     colonia = ColoniaSerializer(read_only=True)
@@ -20,6 +23,7 @@ class PescadorSerializer(serializers.ModelSerializer):
         queryset=Colonia.objects.all(),
         source='colonia',
         write_only=True,
+        allow_null=True,
         required=False,
     )
     comunidade = ComunidadeSerializer(read_only=True)
@@ -27,11 +31,14 @@ class PescadorSerializer(serializers.ModelSerializer):
         queryset=Comunidade.objects.all(),
         source='comunidade',
         write_only=True,
+        allow_null=True,
         required=False,
     )
     enderecos = EnderecoSerializer(many=True, read_only=True)
     dependentes = DependenteSerializer(many=True, read_only=True)
     telefones = TelefoneSerializer(many=True, read_only=True)
+    artes_pesca = ArtePescaSerializer(many=True, read_only=True)
+    areas_pesca = AreaPescaSerializer(many=True, read_only=True)
 
     class Meta:
         model = Pescador
@@ -61,10 +68,11 @@ class PescadorSerializer(serializers.ModelSerializer):
             'outra_renda',
             'ativo',
             'motivo_inatividade',
-            'telefones',
             'falecido',
             'data_cadastramento',
             'enderecos',
             'dependentes',
             'telefones',
+            'artes_pesca',
+            'areas_pesca',
         ]

@@ -52,6 +52,22 @@ class TestePescadorSerializer(TestCase):
                 s = PescadorSerializer(data={'nome': 'Augusto', 'apelido': params[0]})
                 self.assertEqual(s.is_valid(), params[1])
 
+    def teste_data_nascimento_nao_pode_receber_blank(self):
+        data = {
+            'nome': 'João das Quantas',
+            'data_nascimento': '',
+        }
+        s = PescadorSerializer(data=data)
+        self.assertFalse(s.is_valid())
+
+    def teste_data_nascimento_pode_receber_none(self):
+        data = {
+            'nome': 'João das Quantas',
+            'data_nascimento': None,
+        }
+        s = PescadorSerializer(data=data)
+        self.assertTrue(s.is_valid())
+
     def teste_cpf_deve_ter_11_caracteres_numericos(self):
         params_list = [
             (11122233344, True),

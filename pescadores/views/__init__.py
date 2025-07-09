@@ -1,5 +1,5 @@
-from .areas_pesca import AreaPescaList, AreaPescaDetail
-from .artes_pesca import ArtePescaList, ArtePescaDetail
+from .areas_pesca import AreaPescaList, AreaPescaDetail, AreasPescaDoPescadorView
+from .artes_pesca import ArtePescaList, ArtePescaDetail, ArtesPescaDoPescadorView
 from .associacoes import AssociacaoList, AssociacaoDetail
 from .comunidades import ComunidadeList, ComunidadeDetail
 from .colonias import ColoniaList, ColoniaDetail

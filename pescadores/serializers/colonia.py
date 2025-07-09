@@ -15,6 +15,7 @@ class ColoniaSerializer(serializers.ModelSerializer):
         queryset=Endereco.objects.all(),
         source='endereco_sede',
         write_only=True,
+        allow_null=True,
         required=False,
     )
 
