@@ -24,4 +24,5 @@ urlpatterns = [
     path('comunidades/<int:pk>', views.ComunidadeDetail.as_view(), name='comunidade_detail'),
     path('pescadores/<int:pk_pescador>/areaspesca', views.AreasPescaDoPescadorView.as_view()),
     path('pescadores/<int:pk_pescador>/artespesca', views.ArtesPescaDoPescadorView.as_view()),
+    path('pescadores/<int:pk_pescador>/associacoes', views.AssociacoesDoPescadorView.as_view()),
 ]

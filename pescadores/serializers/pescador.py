@@ -8,6 +8,7 @@ from .dependente import DependenteSerializer
 from .telefone import TelefoneSerializer
 from .area_pesca import AreaPescaSerializer
 from .arte_pesca import ArtePescaSerializer
+from .associacao import AssociacaoSerializer
 
 class PescadorSerializer(serializers.ModelSerializer):
     naturalidade = MunicipioSerializer(read_only=True)
@@ -39,6 +40,7 @@ class PescadorSerializer(serializers.ModelSerializer):
     telefones = TelefoneSerializer(many=True, read_only=True)
     artes_pesca = ArtePescaSerializer(many=True, read_only=True)
     areas_pesca = AreaPescaSerializer(many=True, read_only=True)
+    associacoes = AssociacaoSerializer(many=True, read_only=True)
 
     class Meta:
         model = Pescador
@@ -75,4 +77,5 @@ class PescadorSerializer(serializers.ModelSerializer):
             'telefones',
             'artes_pesca',
             'areas_pesca',
+            'associacoes',
         ]
