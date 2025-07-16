@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from pescadores.models import Pescador, Municipio, Colonia, Comunidade
+from pescadores.models import Pescador, Municipio, Colonia, Comunidade, Endereco
 from .municipio import MunicipioSerializer
 from .colonia import ColoniaSerializer
 from .comunidade import ComunidadeSerializer
@@ -35,7 +35,14 @@ class PescadorSerializer(serializers.ModelSerializer):
         allow_null=True,
         required=False,
     )
-    enderecos = EnderecoSerializer(many=True, read_only=True)
+    endereco = EnderecoSerializer(read_only=True)
+    endereco_id = serializers.PrimaryKeyRelatedField(
+        queryset=Endereco.objects.all(),
+        source='endereco',
+        write_only=True,
+        allow_null=True,
+        required=False,
+    )
     dependentes = DependenteSerializer(many=True, read_only=True)
     telefones = TelefoneSerializer(many=True, read_only=True)
     artes_pesca = ArtePescaSerializer(many=True, read_only=True)
@@ -72,7 +79,8 @@ class PescadorSerializer(serializers.ModelSerializer):
             'motivo_inatividade',
             'falecido',
             'data_cadastramento',
-            'enderecos',
+            'endereco',
+            'endereco_id',
             'dependentes',
             'telefones',
             'artes_pesca',
