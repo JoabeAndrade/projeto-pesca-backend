@@ -10,6 +10,7 @@ from .associacao import Associacao
 from .programa_social import ProgramaSocial
 from .arte_pesca import ArtePesca
 from .area_pesca import AreaPesca
+from .porto import Porto
 
 SEXOS = [
     ('m', 'Masculino'),
@@ -75,6 +76,7 @@ class Pescador(models.Model):
     ativo = models.BooleanField(default=True, null=True)
     motivo_inatividade = models.TextField(blank=True, null=True)
     data_cadastramento = models.DateField(blank=True, null=True)
+    porto_desembarque_principal = models.ForeignKey(Porto, on_delete=models.PROTECT)
     falecido = models.BooleanField(default=False, null=True)
 
     def delete(self, *args, **kwargs):

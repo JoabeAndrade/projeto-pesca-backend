@@ -1,18 +1,17 @@
 from django.test import TestCase
 from django.core.exceptions import ValidationError
 from django.db.models.deletion import ProtectedError
-from pescadores.models import Pescador, Municipio, Comunidade, Colonia
-from datetime import date
-from decimal import Decimal
+from pescadores.models import Pescador, Municipio, Comunidade, Colonia, Porto
+from pescadores.tests.utils import novo_pescador_dados_validos
 
 class PescadorTestes(TestCase):
     def teste_dados_validos(self):
-        pescador = self.novo_pescador_dados_validos()
+        pescador = novo_pescador_dados_validos()
         pescador.full_clean()
 
     def teste_nome_obrigatorio(self):
-        p1 = self.novo_pescador_dados_validos(nome=None)
-        p2 = self.novo_pescador_dados_validos(nome='')
+        p1 = novo_pescador_dados_validos(nome=None)
+        p2 = novo_pescador_dados_validos(nome='')
         self.assertRaises(ValidationError, p1.full_clean)
         self.assertRaises(ValidationError, p2.full_clean)
 
@@ -25,14 +24,23 @@ class PescadorTestes(TestCase):
         ]
         for params in param_list:
             with self.subTest(params):
-                pescador = self.novo_pescador_dados_validos(nome=params[0])
+                pescador = novo_pescador_dados_validos(nome=params[0])
                 if params[1]:
                     pescador.full_clean()
                 else:
                     self.assertRaises(ValidationError, pescador.full_clean)
 
+    def teste_porto_obrigatorio(self):
+        p1 = novo_pescador_dados_validos()
+        with self.assertRaises(ValueError):
+            p1.porto_desembarque_principal = ""
+        p2 = novo_pescador_dados_validos()
+        p2.porto_desembarque_principal = None
+        self.assertRaises(ValidationError, p2.full_clean)
+
     def teste_todos_outros_atributos_sao_opcionais(self):
-        pescador = Pescador(nome='João da Silva')
+        porto = Porto.objects.create(nome="Porto de Ilhéus")
+        pescador = Pescador(nome='João da Silva', porto_desembarque_principal=porto)
         pescador.full_clean()
 
     def teste_nome_apelido_ter_entre_2_e_100_caracteres(self):
@@ -44,7 +52,7 @@ class PescadorTestes(TestCase):
         ]
         for params in param_list:
             with self.subTest(params):
-                pescador = self.novo_pescador_dados_validos(apelido=params[0])
+                pescador = novo_pescador_dados_validos(apelido=params[0])
                 if params[1]:
                     pescador.full_clean()
                 else:
@@ -59,7 +67,7 @@ class PescadorTestes(TestCase):
         ]
         for params in param_list:
             with self.subTest(params):
-                pescador = self.novo_pescador_dados_validos(nome_pai=params[0])
+                pescador = novo_pescador_dados_validos(nome_pai=params[0])
                 if params[1]:
                     pescador.full_clean()
                 else:
@@ -74,7 +82,7 @@ class PescadorTestes(TestCase):
         ]
         for params in param_list:
             with self.subTest(params):
-                pescador = self.novo_pescador_dados_validos(nome_mae=params[0])
+                pescador = novo_pescador_dados_validos(nome_mae=params[0])
                 if params[1]:
                     pescador.full_clean()
                 else:
@@ -82,14 +90,15 @@ class PescadorTestes(TestCase):
 
     def teste_municipio_nao_pode_ser_excluido_se_houver_pescador_natural(self):
         municipio = Municipio.objects.create(nome='Nome do Município', uf='SP')
-        pescador = self.novo_pescador_dados_validos()
+        pescador = novo_pescador_dados_validos()
         pescador.naturalidade = municipio
         pescador.save()
         self.assertRaises(ProtectedError, municipio.delete)
 
     def teste_rg_deve_ter_menos_de_20_caracteres(self):
-        p1 = self.novo_pescador_dados_validos(rg='a' * 20)
-        p2 = self.novo_pescador_dados_validos(rg='a' * 21)
+        # porto = create_porto_dados_validos()
+        p1 = novo_pescador_dados_validos(rg='a' * 20)
+        p2 = novo_pescador_dados_validos(rg='a' * 21)
         p1.full_clean()
         self.assertRaises(ValidationError, p2.full_clean)
 
@@ -103,15 +112,15 @@ class PescadorTestes(TestCase):
         ]
         for params in param_list:
             with self.subTest(params):
-                pescador = self.novo_pescador_dados_validos(cpf=params[0])
+                pescador = novo_pescador_dados_validos(cpf=params[0])
                 if params[1]:
                     pescador.full_clean()
                 else:
                     self.assertRaises(ValidationError, pescador.full_clean)
 
     def teste_matricula_colonia_pode_ter_no_maximo_20_caracteres(self):
-        p1 = self.novo_pescador_dados_validos(matricula_colonia='1' * 20)
-        p2 = self.novo_pescador_dados_validos(matricula_colonia='1' * 21)
+        p1 = novo_pescador_dados_validos(matricula_colonia='1' * 20)
+        p2 = novo_pescador_dados_validos(matricula_colonia='1' * 21)
         p1.full_clean()
         self.assertRaises(ValidationError, p2.full_clean)
 
@@ -124,29 +133,29 @@ class PescadorTestes(TestCase):
         ]
         for params in param_list:
             with self.subTest(params):
-                pescador = self.novo_pescador_dados_validos(matricula_colonia=params[0])
+                pescador = novo_pescador_dados_validos(matricula_colonia=params[0])
                 if params[1]:
                     pescador.full_clean()
                 else:
                     self.assertRaises(ValidationError, pescador.full_clean)
 
     def teste_renda_mensal_pesca_nao_pode_ser_negativo(self):
-        p1 = self.novo_pescador_dados_validos(renda_mensal_pesca=1000)
-        p2 = self.novo_pescador_dados_validos(renda_mensal_pesca=0)
-        p3 = self.novo_pescador_dados_validos(renda_mensal_pesca=-1000)
+        p1 = novo_pescador_dados_validos(renda_mensal_pesca=1000)
+        p2 = novo_pescador_dados_validos(renda_mensal_pesca=0)
+        p3 = novo_pescador_dados_validos(renda_mensal_pesca=-1000)
         p1.full_clean()
         p2.full_clean()
         self.assertRaises(ValidationError, p3.full_clean)
 
     def teste_outra_renda_tem_no_maximo_50_caracteres(self):
-        p1 = self.novo_pescador_dados_validos(outra_renda='a' * 50)
-        p2 = self.novo_pescador_dados_validos(outra_renda='a' * 51)
+        p1 = novo_pescador_dados_validos(outra_renda='a' * 50)
+        p2 = novo_pescador_dados_validos(outra_renda='a' * 51)
         p1.full_clean()
         self.assertRaises(ValidationError, p2.full_clean)
 
     def teste_falecido_falso_por_default(self):
-        p1 = self.novo_pescador_dados_validos(falecido=True)
-        p2 = self.novo_pescador_dados_validos(falecido=None)
+        p1 = novo_pescador_dados_validos(falecido=True)
+        p2 = novo_pescador_dados_validos(falecido=None)
         p1.save()
         p2.save()
         self.assertTrue(p1.falecido)
@@ -156,52 +165,7 @@ class PescadorTestes(TestCase):
         mun = Municipio.objects.create(nome='Ilhéus', uf='BA')
         com = Comunidade.objects.create(nome='Beira-Mar', municipio=mun)
         colonia = Colonia.objects.create(codigo='Z-01', comunidade=com)
-        pescador = self.novo_pescador_dados_validos()
+        pescador = novo_pescador_dados_validos()
         pescador.colonia = colonia
         pescador.save()
         self.assertRaises(ProtectedError, colonia.delete)
-
-    def novo_pescador_dados_validos(self,
-        nome="João da Silva",
-        sexo="m",
-        apelido="Joãozinho",
-        data_nascimento=date(1980, 5, 12),
-        nome_pai="Pedro da Silva",
-        nome_mae="Maria das Dores",
-        rg="123456789",
-        cpf="12345678901",
-        matricula_colonia="12345",
-        data_inscricao_colonia=date(2005, 7, 1),
-        tipo_embarcacao="canoa",
-        tamanho_embarcacao="pequeno",
-        proprietario_embarcacao=True,
-        escolaridade="fundamental_completo",
-        renda_mensal_pesca=Decimal("1500.00"),
-        outra_renda="Trabalho rural",
-        ativo=True,
-        motivo_inatividade="",
-        falecido=False,
-        data_cadastramento=date.today(),
-    ):
-        return Pescador(
-            nome=nome,
-            sexo=sexo,
-            apelido=apelido,
-            data_nascimento=data_nascimento,
-            nome_pai=nome_pai,
-            nome_mae=nome_mae,
-            rg=rg,
-            cpf=cpf,
-            matricula_colonia=matricula_colonia,
-            data_inscricao_colonia=data_inscricao_colonia,
-            tipo_embarcacao=tipo_embarcacao,
-            tamanho_embarcacao=tamanho_embarcacao,
-            proprietario_embarcacao=proprietario_embarcacao,
-            escolaridade=escolaridade,
-            renda_mensal_pesca=renda_mensal_pesca,
-            outra_renda=outra_renda,
-            ativo=ativo,
-            motivo_inatividade=motivo_inatividade,
-            falecido=falecido,
-            data_cadastramento=data_cadastramento,
-        )

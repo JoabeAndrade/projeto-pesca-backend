@@ -86,4 +86,11 @@ class PescadorSerializer(serializers.ModelSerializer):
             'artes_pesca',
             'areas_pesca',
             'associacoes',
+            'porto_desembarque_principal',
+            'programas_sociais',
         ]
+        extra_kwargs = {
+            'programas_sociais': {
+                'required': False,
+            },
+        }

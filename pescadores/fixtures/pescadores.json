@@ -10,6 +10,7 @@
     {"model": "pescadores.colonia", "pk": 3, "fields": {"codigo": "Z 18 - Itacaré", "comunidade": 1}},
     {"model": "pescadores.programasocial", "pk": 1, "fields": {"nome": "Bolsa Família"}},
     {"model": "pescadores.programasocial", "pk": 2, "fields": {"nome": "Benefício Pescador"}},
+    {"model": "pescadores.porto", "pk": 1, "fields": {"nome": "Porto de Ilhéus"}},
     {
         "model": "pescadores.pescador",
         "pk": 1,
@@ -36,7 +37,8 @@
             "motivo_inatividade": null,
             "falecido": false,
             "data_cadastramento": "2024-05-05",
-            "programas_sociais": [1, 2]
+            "programas_sociais": [1, 2],
+            "porto_desembarque_principal": 1
         }
     },
     {
@@ -64,7 +66,8 @@
             "ativo": true,
             "motivo_inatividade": null,
             "falecido": false,
-            "data_cadastramento": null
+            "data_cadastramento": null,
+            "porto_desembarque_principal": 1
         }
     },
     {
@@ -93,7 +96,8 @@
             "motivo_inatividade": null,
             "falecido": false,
             "data_cadastramento": null,
-            "programas_sociais": []
+            "programas_sociais": [],
+            "porto_desembarque_principal": 1
         }
     },
     {
