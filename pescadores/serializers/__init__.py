@@ -9,3 +9,4 @@ from .area_pesca import AreaPescaSerializer
 from .arte_pesca import ArtePescaSerializer
 from .associacao import AssociacaoSerializer
 from .comunidade import ComunidadeSerializer
+from .projeto import ProjetoSerializer

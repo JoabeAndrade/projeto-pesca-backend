@@ -11,6 +11,7 @@ from .programa_social import ProgramaSocial
 from .arte_pesca import ArtePesca
 from .area_pesca import AreaPesca
 from .porto import Porto
+from .projeto import Projeto
 
 SEXOS = [
     ('m', 'Masculino'),
@@ -78,6 +79,7 @@ class Pescador(models.Model):
     data_cadastramento = models.DateField(blank=True, null=True)
     porto_desembarque_principal = models.ForeignKey(Porto, on_delete=models.PROTECT)
     falecido = models.BooleanField(default=False, null=True)
+    projeto = models.ForeignKey(Projeto, on_delete=models.PROTECT, blank=True, null=True)
 
     def delete(self, *args, **kwargs):
         if self.endereco:

@@ -14,3 +14,4 @@ from .renda import Renda
 from .associacao import Associacao
 from .comunidade import Comunidade
 from .porto import Porto
+from .projeto import Projeto
