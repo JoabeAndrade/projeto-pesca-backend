@@ -92,6 +92,6 @@ class PescadorSerializer(serializers.ModelSerializer):
         ]
         extra_kwargs = {
             'programas_sociais': {
-                'required': False,
+                'allow_empty': True,
             },
         }

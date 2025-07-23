@@ -6,3 +6,9 @@ class Colonia(models.Model):
     codigo = models.CharField(max_length=50)
     comunidade = models.ForeignKey(Comunidade, related_name='comunidades', on_delete=models.PROTECT)
     endereco_sede = models.ForeignKey(Endereco, on_delete=models.SET_NULL, blank=True, null=True)
+
+    def __repr__(self):
+        return self.codigo
+
+    def __str__(self):
+        return self.codigo

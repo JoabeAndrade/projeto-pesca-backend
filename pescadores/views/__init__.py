@@ -8,4 +8,5 @@ from .enderecos import EnderecoList, EnderecoDetail
 from .municipios import MunicipioList, MunicipioDetail
 from .pescadores import PescadorList, PescadorDetail
 from .telefones import TelefoneList, TelefoneDetail
+from .portos import PortoList, PortoDetail
 from .projetos import ProjetoList, ProjetoDetail
