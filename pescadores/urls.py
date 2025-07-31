@@ -26,6 +26,8 @@ urlpatterns = [
     path('portos/<int:pk>', views.PortoDetail.as_view(), name='porto_detail'),
     path('projetos/', views.ProjetoList.as_view(), name='projeto_list'),
     path('projetos/<int:pk>', views.ProjetoDetail.as_view(), name='projeto_detail'),
+    path('programas/', views.ProgramaSocialListView.as_view(), name='programa_list'),
+    path('programas/<int:pk>', views.ProgramaSocialDetailView.as_view(), name='programa_detail'),
     path('pescadores/<int:pk_pescador>/areaspesca', views.AreasPescaDoPescadorView.as_view()),
     path('pescadores/<int:pk_pescador>/artespesca', views.ArtesPescaDoPescadorView.as_view()),
     path('pescadores/<int:pk_pescador>/associacoes', views.AssociacoesDoPescadorView.as_view()),

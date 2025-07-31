@@ -10,3 +10,4 @@ from .pescadores import PescadorList, PescadorDetail
 from .telefones import TelefoneList, TelefoneDetail
 from .portos import PortoList, PortoDetail
 from .projetos import ProjetoList, ProjetoDetail
+from .programas_sociais import ProgramaSocialListView, ProgramaSocialDetailView
