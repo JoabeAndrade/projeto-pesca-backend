@@ -4,10 +4,10 @@ from rest_framework.generics import (
     ListCreateAPIView, RetrieveUpdateDestroyAPIView
 )
 
-class ProgramaSocialListView(ListCreateAPIView):
+class ProgramaSocialList(ListCreateAPIView):
     queryset = ProgramaSocial.objects.all()
     serializer_class = ProgramaSocialSerialzier
 
-class ProgramaSocialDetailView(RetrieveUpdateDestroyAPIView):
+class ProgramaSocialDetail(RetrieveUpdateDestroyAPIView):
     queryset = ProgramaSocial.objects.all()
     serializer_class = ProgramaSocialSerialzier

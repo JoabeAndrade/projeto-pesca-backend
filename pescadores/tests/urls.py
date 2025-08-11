@@ -73,3 +73,11 @@ class TesteUrls(TestCase):
     def teste_url_pescador_detail(self):
         url = reverse('pescador_detail', kwargs={'pk': 1})
         assert url == '/pescadores/1'
+
+    def teste_url_pescador_especialista_list(self):
+        url = reverse('especialista_list')
+        assert url == '/especialistas/'
+
+    def teste_url_pescador_especialista_detail(self):
+        url = reverse('especialista_detail', kwargs={'pk': 9})
+        assert url == '/especialistas/9'

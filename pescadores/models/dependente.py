@@ -1,6 +1,6 @@
 from django.db import models
-from pescadores.models import Pescador
 from django.core.validators import MinValueValidator
+from .pescador import Pescador
 
 TIPOS_DEPENDENTE = [
     ('conjuge_companheira', 'Cônjuge ou companheiro(a)'),

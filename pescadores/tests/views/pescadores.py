@@ -4,7 +4,7 @@ from django.urls import reverse
 from rest_framework import status
 from pescadores.models import Pescador
 from pescadores.serializers import PescadorSerializer
-from pescadores.tests.utils import create_porto_dados_validos
+from pescadores.tests.utils import get_or_create_porto_dados_validos
 
 class TesteListarTodosPescadores(TestCase):
     fixtures = ['pescadores']
@@ -32,7 +32,7 @@ class TesteVerPescador(TestCase):
 
 class TesteInserirPescador(TestCase):
     def setUp(self):
-        porto = create_porto_dados_validos()
+        porto = get_or_create_porto_dados_validos()
         self.valid_payload = {
             'nome': 'Adalberto de Tal',
             'sexo': 'm',
@@ -69,7 +69,7 @@ class TesteEditarPescador(TestCase):
     fixtures = ['pescadores']
 
     def setUp(self):
-        porto = create_porto_dados_validos()
+        porto = get_or_create_porto_dados_validos()
         self.valid_payload = {
             'nome': 'João',
             'sexo': 'm',

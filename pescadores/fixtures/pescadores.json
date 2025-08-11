@@ -10,7 +10,7 @@
     {"model": "pescadores.colonia", "pk": 3, "fields": {"codigo": "Z 18 - Itacaré", "comunidade": 1}},
     {"model": "pescadores.programasocial", "pk": 1, "fields": {"nome": "Bolsa Família"}},
     {"model": "pescadores.programasocial", "pk": 2, "fields": {"nome": "Benefício Pescador"}},
-    {"model": "pescadores.porto", "pk": 1, "fields": {"nome": "Porto de Ilhéus"}},
+    {"model": "pescadores.porto", "pk": 1, "fields": {"nome": "Porto de Ilhéus", "municipio": 1}},
     {
         "model": "pescadores.pescador",
         "pk": 1,

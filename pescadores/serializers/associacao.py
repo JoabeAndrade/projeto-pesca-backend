@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from pescadores.models import Associacao, Endereco
-from pescadores.serializers import EnderecoSerializer
+from .endereco import EnderecoSerializer
 
 class AssociacaoSerializer(serializers.ModelSerializer):
     endereco = EnderecoSerializer(read_only=True)

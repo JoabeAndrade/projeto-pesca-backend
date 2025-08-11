@@ -1,4 +1,5 @@
 from .pescador import *
+from .pescador_especialista import *
 from .area_pesca import *
 from .arte_pesca import *
 from .comunidade import *

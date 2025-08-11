@@ -1,9 +1,16 @@
-from pescadores.models import Pescador, Porto
+from pescadores.models import Pescador, Porto, Municipio
 from datetime import date
 from decimal import Decimal
 
-def create_porto_dados_validos(nome="Porto de Ilhéus"):
-    return Porto.objects.create(nome=nome)
+def get_or_create_municipio_dados_validos(nome="Ilhéus", uf="BA"):
+    m, _ = Municipio.objects.get_or_create(nome=nome, uf=uf)
+    return m
+
+def get_or_create_porto_dados_validos(nome="Porto de Ilhéus", municipio=None):
+    if not municipio:
+        municipio = get_or_create_municipio_dados_validos()
+    p, _ = Porto.objects.get_or_create(nome=nome, municipio=municipio)
+    return p
 
 def novo_pescador_dados_validos(
     nome="João da Silva",
@@ -29,7 +36,7 @@ def novo_pescador_dados_validos(
     porto_desembarque_principal=None,
 ):
     if not porto_desembarque_principal:
-        porto_desembarque_principal = Porto.objects.create(nome="Porto de Ilhéus")
+        porto_desembarque_principal = get_or_create_porto_dados_validos()
     return Pescador(
         nome=nome,
         sexo=sexo,
@@ -78,7 +85,7 @@ def create_pescador_dados_validos(
     porto_desembarque_principal=None,
 ):
     if not porto_desembarque_principal:
-        porto_desembarque_principal = create_porto_dados_validos()
+        porto_desembarque_principal = get_or_create_porto_dados_validos()
     return Pescador.objects.create(
         nome=nome,
         sexo=sexo,

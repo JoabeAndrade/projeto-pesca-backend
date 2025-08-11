@@ -2,7 +2,10 @@ from django.test import TestCase
 from django.core.exceptions import ValidationError
 from django.db.models.deletion import ProtectedError
 from pescadores.models import Pescador, Municipio, Comunidade, Colonia, Porto
-from pescadores.tests.utils import novo_pescador_dados_validos
+from pescadores.tests.utils import (
+    novo_pescador_dados_validos,
+    get_or_create_porto_dados_validos,
+)
 
 class PescadorTestes(TestCase):
     def teste_dados_validos(self):
@@ -39,7 +42,7 @@ class PescadorTestes(TestCase):
         self.assertRaises(ValidationError, p2.full_clean)
 
     def teste_todos_outros_atributos_sao_opcionais(self):
-        porto = Porto.objects.create(nome="Porto de Ilhéus")
+        porto = get_or_create_porto_dados_validos(nome="Porto de Ilhéus")
         pescador = Pescador(nome='João da Silva', porto_desembarque_principal=porto)
         pescador.full_clean()
 

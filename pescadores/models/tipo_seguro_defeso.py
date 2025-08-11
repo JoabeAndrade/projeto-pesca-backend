@@ -1,0 +1,13 @@
+from django.db import models
+
+class TipoSeguroDefeso(models.Model):
+    nome = models.CharField(max_length=100, unique=True)
+
+    def __repr__(self):
+        return self.nome
+
+    def __str__(self):
+        return self.nome
+
+    class Meta:
+        verbose_name_plural = 'tipos seguro defeso'

@@ -1,10 +1,10 @@
 from django.test import TestCase
 from pescadores.serializers import PescadorSerializer
-from pescadores.tests.utils import create_porto_dados_validos
+from pescadores.tests.utils import get_or_create_porto_dados_validos
 
 class TestePescadorSerializer(TestCase):
     def setUp(self):
-        self.porto = create_porto_dados_validos()
+        self.porto = get_or_create_porto_dados_validos()
 
     def teste_nome_obrigatorio(self):
         data_com_nome = {'nome': 'Fulano de Tal', 'porto_desembarque_principal': self.porto.id}
