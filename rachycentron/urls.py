@@ -1,22 +1,18 @@
-"""
-URL configuration for rachycentron project.
+# Arquivo: rachycentron/urls.py (VERSÃO FINAL E CORRETA)
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.2/topics/http/urls/
-"""
 from django.contrib import admin
 from django.urls import path, include
-from django.conf import settings # <-- IMPORTANTE: Adicione esta linha
+from django.conf import settings # <-- Importa as configurações do Django
 
-# Suas URLs principais
+# Suas URLs principais que devem funcionar em produção
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('pescadores.urls')),
 ]
 
-# Este bloco só será executado se DEBUG for True (ou seja, no seu computador)
+# Este bloco só será executado se settings.DEBUG for True (no seu computador)
+# O Render (onde DEBUG é False) vai ignorar completamente este bloco.
 if settings.DEBUG:
-    # A importação é feita aqui dentro para não dar erro em produção
     import debug_toolbar
     urlpatterns += [
         path('__debug__/', include(debug_toolbar.urls)),
