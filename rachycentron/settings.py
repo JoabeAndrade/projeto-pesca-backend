@@ -21,7 +21,7 @@ load_dotenv(BASE_DIR / '.env')
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # DEBUG é False em produção (no Render) e True localmente
-DEBUG = 'RENDER' not in os.environ
+DEBUG = True
 
 # Configuração de ALLOWED_HOSTS para o Render e desenvolvimento local
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']

@@ -8,7 +8,7 @@ urlpatterns = [
         name='area_pesca_list',
     ),
     path(
-        'areaspesca/<int:pk>/', # <-- Corrigido
+        'areaspesca/<int:pk>',
         views.AreaPescaDetail.as_view(),
         name='area_pesca_detail',
     ),
@@ -18,7 +18,7 @@ urlpatterns = [
         name='arte_pesca_list',
     ),
     path(
-        'artespesca/<int:pk>/', # <-- Corrigido
+        'artespesca/<int:pk>',
         views.ArtePescaDetail.as_view(),
         name='arte_pesca_detail',
     ),
@@ -28,7 +28,7 @@ urlpatterns = [
         name='associacao_list',
     ),
     path(
-        'associacoes/<int:pk>/', # <-- Corrigido
+        'associacoes/<int:pk>',
         views.AssociacaoDetail.as_view(),
         name='associacao_detail',
     ),
@@ -38,7 +38,7 @@ urlpatterns = [
         name='atividade_anterior_list',
     ),
     path(
-        'atividadesanteriores/<int:pk>/', # <-- Corrigido
+        'atividadesanteriores/<int:pk>',
         views.AtividadeAnteriorDetail.as_view(),
         name='atividade_anterior_detail',
     ),
@@ -48,7 +48,7 @@ urlpatterns = [
         name='colonia_list',
     ),
     path(
-        'colonias/<int:pk>/', # <-- Corrigido
+        'colonias/<int:pk>',
         views.ColoniaDetail.as_view(),
         name='colonia_detail',
     ),
@@ -58,7 +58,7 @@ urlpatterns = [
         name='comprador_pescado_list',
     ),
     path(
-        'compradorespescado/<int:pk>/', # <-- Corrigido
+        'compradorespescado/<int:pk>',
         views.CompradorPescadoDetail.as_view(),
         name='comprador_pescado_detail',
     ),
@@ -68,37 +68,50 @@ urlpatterns = [
         name='comunidade_list',
     ),
     path(
-        'comunidades/<int:pk>/', # <-- Corrigido
+        'comunidades/<int:pk>',
         views.ComunidadeDetail.as_view(),
         name='comunidade_detail',
     ),
+    # Cursos de beneficiamento
     path(
         'dependentes/',
         views.DependenteView.as_view(),
         name='dependente_list',
     ),
     path(
-        'dependentes/<int:pk>/', # <-- Corrigido
+        'dependentes/<int:pk>',
         views.DependenteView.as_view(),
         name='dependente_detail',
     ),
+    # Destinos pescado
+    # Destinos sobras
+    # Dificuldades área
+    # Emissores RGP
     path(
         'enderecos/',
         views.EnderecoList.as_view(),
         name='endereco_list',
     ),
     path(
-        'enderecos/<int:pk>/', # <-- Corrigido
+        'enderecos/<int:pk>',
         views.EnderecoDetail.as_view(),
         name='endereco_detail',
     ),
+    # Estados civis
+    # Renda durante defeso
+    # Frequencias consumo
+    # Frequencias pesca
+    # Horários pesca
+    # Estrutura residencial
+    # Locais de tratamento
+    # Motivações
     path(
         'municipios/',
         views.MunicipioList.as_view(),
         name='municipio_list',
     ),
     path(
-        'municipios/<int:pk>/', # <-- Corrigido
+        'municipios/<int:pk>',
         views.MunicipioDetail.as_view(),
         name='municipio_detail',
     ),
@@ -108,7 +121,7 @@ urlpatterns = [
         name='especialista_list',
     ),
     path(
-        'especialistas/<int:pk>/', # <-- Corrigido
+        'especialistas/<int:pk>',
         views.PescadorEspecialistaDetail.as_view(),
         name='especialista_detail',
     ),
@@ -118,20 +131,20 @@ urlpatterns = [
         name='pescador_list',
     ),
     path(
-        'pescadores/<int:pk>/', # <-- Corrigido
+        'pescadores/<int:pk>',
         views.PescadorDetail.as_view(),
         name='pescador_detail',
     ),
     path(
-        'pescadores/<int:pk_pescador>/areaspesca/', # <-- Corrigido
+        'pescadores/<int:pk_pescador>/areaspesca',
         views.AreasPescaDoPescadorView.as_view(),
     ),
     path(
-        'pescadores/<int:pk_pescador>/artespesca/', # <-- Corrigido
+        'pescadores/<int:pk_pescador>/artespesca',
         views.ArtesPescaDoPescadorView.as_view(),
     ),
     path(
-        'pescadores/<int:pk_pescador>/associacoes/', # <-- Corrigido
+        'pescadores/<int:pk_pescador>/associacoes',
         views.AssociacoesDoPescadorView.as_view(),
     ),
     path(
@@ -140,7 +153,7 @@ urlpatterns = [
         name='porto_list',
     ),
     path(
-        'portos/<int:pk>/', # <-- Corrigido
+        'portos/<int:pk>',
         views.PortoDetail.as_view(),
         name='porto_detail',
     ),
@@ -150,7 +163,7 @@ urlpatterns = [
         name='programa_list',
     ),
     path(
-        'programas/<int:pk>/', # <-- Corrigido
+        'programas/<int:pk>',
         views.ProgramaSocialDetail.as_view(),
         name='programa_detail',
     ),
@@ -160,17 +173,19 @@ urlpatterns = [
         name='projeto_list',
     ),
     path(
-        'projetos/<int:pk>/', # <-- Corrigido
+        'projetos/<int:pk>',
         views.ProjetoDetail.as_view(),
         name='projeto_detail',
     ),
+    # Relações companhia
+    # Relações parentesco
     path(
         'telefones/',
         views.TelefoneList.as_view(),
         name='telefone_list',
     ),
     path(
-        'telefones/<int:pk>/', # <-- Corrigido
+        'telefones/<int:pk>',
         views.TelefoneDetail.as_view(),
         name='telefone_detail',
     ),
