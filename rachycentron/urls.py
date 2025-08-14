@@ -4,14 +4,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings # <-- Importa as configurações do Django
 
-# Suas URLs principais que devem funcionar em produção
+# Suas URLs principais
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('pescadores.urls')),
 ]
 
-# Este bloco só será executado se settings.DEBUG for True (no seu computador)
-# O Render (onde DEBUG é False) vai ignorar completamente este bloco.
+# Este bloco só será executado se DEBUG for True
 if settings.DEBUG:
     import debug_toolbar
     urlpatterns += [
