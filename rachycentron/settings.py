@@ -21,10 +21,10 @@ load_dotenv(BASE_DIR / '.env')
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # DEBUG é False em produção (no Render) e True localmente
-DEBUG = 'RENDER' not in os.environ  # Se não estiver no Render, DEBUG é True
+DEBUG = True  # Se não estiver no Render, DEBUG é True
 
 # Configuração de ALLOWED_HOSTS para o Render e desenvolvimento local
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.onrender.com']
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
@@ -85,8 +85,9 @@ WSGI_APPLICATION = 'rachycentron.wsgi.application'
 # 4. Database configurado para ler a DATABASE_URL do ambiente
 DATABASES = {
     'default': dj_database_url.config(
-        conn_max_age=600,
-        ssl_require='RENDER' in os.environ # Exige SSL apenas no Render
+        default=os.environ.get('DATABASE_URL'),
+        conn_max_age=600,  # Conexões persistentes por 10 minutos
+        ssl_require=DEBUG is False,  # SSL é obrigatório em produção
     )
 }
 

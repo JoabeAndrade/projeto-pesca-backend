@@ -88,6 +88,5 @@ local_settings.py
 .env
 db.sqlite3
 
-migrations/
 data.json
 extras.json
