@@ -21,7 +21,7 @@ load_dotenv(BASE_DIR / '.env')
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # DEBUG é False em produção (no Render) e True localmente
-DEBUG = True
+DEBUG = 'RENDER' not in os.environ  # Se não estiver no Render, DEBUG é True
 
 # Configuração de ALLOWED_HOSTS para o Render e desenvolvimento local
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'pescadores',
     'corsheaders',
 ]
+
+if DEBUG:
+    INSTALLED_APPS.append('debug_toolbar')
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
