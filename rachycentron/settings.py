@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'pescadores',
-    'debug_toolbar',
     'corsheaders',
 ]
 
